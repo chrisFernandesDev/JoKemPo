@@ -1,6 +1,5 @@
 package com.example.jokempo
 
-import android.content.ClipData.Item
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,17 +8,17 @@ import kotlin.math.floor
 
 class GameViewModel : ViewModel() {
 
-//    var escolhaUser: Boolean = false
     private val _escolhaUser = MutableLiveData<String>()
     val escolhaUser: LiveData<String> get() = _escolhaUser
+
+    var resultadoFinal: String = ""
 
 
     init {
         escolhaDoClickApp()
-        Log.d("escolha", escolhaDoClickApp())
     }
 
-    fun escolhaDoClickApp() : String {
+    fun escolhaDoClickApp(): String {
         val aleatorio = floor(Math.random() * 5)
         val resultadoAleatorio = when (aleatorio) {
             0.0 -> "pedra"
@@ -33,134 +32,103 @@ class GameViewModel : ViewModel() {
 
     fun escolhaDoUsuario(item: String) {
         _escolhaUser.value = item
-
         if (escolhaDoClickApp() == "pedra") {
             if (_escolhaUser.value == "pedra") {
-                Log.d("Entrei aqui", "Result")
+                resultadoFinal = "Empate"
+            }
+            if (_escolhaUser.value == "papel") {
+                resultadoFinal = "User Ganhou"
+            }
+            if (_escolhaUser.value == "tesoura") {
+                resultadoFinal = "App Ganhou"
+            }
+            if (_escolhaUser.value == "spock") {
+                resultadoFinal = "User Ganhou";
+            }
+            if (_escolhaUser.value == "lagarto") {
+                resultadoFinal = "APP Ganhou";
             }
         }
 
         if (escolhaDoClickApp() == "papel") {
+            if (_escolhaUser.value == "pedra") {
+                resultadoFinal = "APP Ganhou";
+            }
             if (_escolhaUser.value == "papel") {
-                Log.d("Entrei aqui", "Result")
+                resultadoFinal = "Empate";
+            }
+            if (_escolhaUser.value == "tesoura") {
+                resultadoFinal = "User Ganhou";
+            }
+            if (_escolhaUser.value == "spock") {
+                resultadoFinal = "APP Ganhou";
+            }
+            if (_escolhaUser.value == "lagarto") {
+                resultadoFinal = "User Ganhou";
             }
         }
 
         if (escolhaDoClickApp() == "tesoura") {
+            if (_escolhaUser.value == "pedra") {
+                resultadoFinal = "User Ganhou";
+            }
+            if (_escolhaUser.value == "papel") {
+                resultadoFinal = "APP Ganhou";
+            }
             if (_escolhaUser.value == "tesoura") {
-                Log.d("Entrei aqui", "Result")
+                resultadoFinal = "Empate";
+            }
+            if (_escolhaUser.value == "spock") {
+                resultadoFinal = "APP Ganhou";
+            }
+            if (_escolhaUser.value == "lagarto") {
+                resultadoFinal = "User Ganhou";
             }
         }
 
         if (escolhaDoClickApp() == "spock") {
+            if (_escolhaUser.value == "pedra") {
+                resultadoFinal = "User Ganhou";
+            }
+            if (_escolhaUser.value == "papel") {
+                resultadoFinal = "APP Ganhou";
+            }
+            if (_escolhaUser.value == "tesoura") {
+                resultadoFinal = "User Ganhou";
+            }
             if (_escolhaUser.value == "spock") {
-                Log.d("Entrei aqui", "Result")
+                resultadoFinal = "Empate";
+            }
+            if (_escolhaUser.value == "lagarto") {
+                resultadoFinal = "APP Ganhou";
             }
         }
 
         if (escolhaDoClickApp() == "lagarto") {
+            if (_escolhaUser.value == "pedra") {
+                resultadoFinal = "User Ganhou";
+            }
+            if (_escolhaUser.value == "papel") {
+                resultadoFinal = "APP Ganhou";
+            }
+            if (_escolhaUser.value == "tesoura") {
+                resultadoFinal = "User Ganhou";
+            }
+            if (_escolhaUser.value == "spock") {
+                resultadoFinal = "APP Ganhou";
+            }
             if (_escolhaUser.value == "lagarto") {
-                Log.d("Entrei aqui", "Result")
+                resultadoFinal = "Empate";
             }
         }
 
-
-
-        Log.d("Entrei aqui", _escolhaUser.toString())
+        Log.d("Entrei aqui", resultadoFinal)
     }
 
 //    fun resultadoJogo() {
 //        val resultadoFinalDoJogo = when (escolhaDoUsuario("")) {
 //            "pedra" -> "re"
 //            else -> {}
-//        }
-//    }
-
-//    fun resultadoJogo() {
-//        if (escolhaDoClickApp() == "pedra") {
-//            if (_escolhaUser == "pedra") {
-//                resultado = "Empate";
-//            }
-//            if (escolhaUser == "papel") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "tesoura") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "spock") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "lagarto") {
-//                resultado = "APP Ganhou";
-//            }
-//        }
-//        if (escolhaApp == "papel") {
-//            if (escolhaUser == "pedra") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "papel") {
-//                resultado = "Empate";
-//            }
-//            if (escolhaUser == "tesoura") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "spock") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "lagarto") {
-//                resultado = "User Ganhou";
-//            }
-//        }
-//        if (escolhaApp == "tesoura") {
-//            if (escolhaUser == "pedra") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "papel") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "tesoura") {
-//                resultado = "Empate";
-//            }
-//            if (escolhaUser == "spock") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "lagarto") {
-//                resultado = "User Ganhou";
-//            }
-//        }
-//        if (escolhaApp == "spock") {
-//            if (escolhaUser == "pedra") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "papel") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "tesoura") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "spock") {
-//                resultado = "Empate";
-//            }
-//            if (escolhaUser == "lagarto") {
-//                resultado = "APP Ganhou";
-//            }
-//        }
-//        if (escolhaApp == "lagarto") {
-//            if (escolhaUser == "pedra") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "papel") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "tesoura") {
-//                resultado = "User Ganhou";
-//            }
-//            if (escolhaUser == "spock") {
-//                resultado = "APP Ganhou";
-//            }
-//            if (escolhaUser == "lagarto") {
-//                resultado = "Empate";
-//            }
 //        }
 //    }
 }

@@ -33,23 +33,18 @@ class GameFragment : Fragment() {
     private fun botoesUsuario() {
         binding.imgPedra.setOnClickListener { (true)
             respostaCliqueUser("pedra")
-            Log.d("Entrei aqui", "pedra")
         }
         binding.imgPapel.setOnClickListener {
             respostaCliqueUser("papel")
-            Log.d("Entrei aqui", "papel")
         }
         binding.imgTesoura.setOnClickListener {
             respostaCliqueUser("tesoura")
-            Log.d("Entrei aqui", "tesoura")
         }
         binding.imgSpock.setOnClickListener {
             respostaCliqueUser("spock")
-            Log.d("Entrei aqui", "spock")
         }
         binding.imgLagarto.setOnClickListener {
             respostaCliqueUser("lagarto")
-            Log.d("Entrei aqui", "lagarto")
         }
     }
 
