@@ -18,16 +18,9 @@ class GameViewModel : ViewModel() {
         escolhaDoClickApp()
     }
 
-    fun escolhaDoClickApp(): String {
-        val aleatorio = floor(Math.random() * 5)
-        val resultadoAleatorio = when (aleatorio) {
-            0.0 -> "pedra"
-            1.0 -> "papel"
-            2.0 -> "tesoura"
-            3.0 -> "spock"
-            else -> "lagarto"
-        }
-        return resultadoAleatorio
+    fun escolhaDoClickApp() : String {
+        val resultadoAleatorio = ListaDoJogoEnum().randomAnswer
+        return resultadoAleatorio.toString()
     }
 
     fun escolhaDoUsuario(item: String) {
