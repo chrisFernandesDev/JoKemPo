@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlin.math.floor
+import kotlin.random.Random
 
 class GameViewModel : ViewModel() {
 
@@ -18,9 +18,15 @@ class GameViewModel : ViewModel() {
         escolhaDoClickApp()
     }
 
-    fun escolhaDoClickApp() : String {
-        val resultadoAleatorio = ListaDoJogoEnum().randomAnswer
-        return resultadoAleatorio.toString()
+    fun escolhaDoClickApp(): String{
+        val randomValue = getRandomEnumValue()
+        return randomValue.toString()
+    }
+
+    fun getRandomEnumValue(): ListaDoJogoEnum.RespostasApp {
+        val values = ListaDoJogoEnum.RespostasApp.values()
+        val randomValues = Random.nextInt(values.size)
+        return values[randomValues]
     }
 
     fun escolhaDoUsuario(item: String) {
