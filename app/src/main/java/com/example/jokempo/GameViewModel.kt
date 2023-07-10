@@ -9,9 +9,10 @@ import kotlin.random.Random
 class GameViewModel : ViewModel() {
 
     private val _escolhaUser = MutableLiveData<String>()
-    val escolhaUser: LiveData<String> get() = _escolhaUser
+    val escolhaUser: LiveData<String> = _escolhaUser
 
-    var resultadoFinal: String = ""
+    private val _resultadoFinal = MutableLiveData<String>()
+    var resultadoFinal: LiveData<String> = _resultadoFinal
 
 
     init {
@@ -31,103 +32,16 @@ class GameViewModel : ViewModel() {
 
     fun escolhaDoUsuario(item: String) {
         _escolhaUser.value = item
-        if (escolhaDoClickApp() == "pedra") {
-            if (_escolhaUser.value == "pedra") {
-                resultadoFinal = "Empate"
-            }
-            if (_escolhaUser.value == "papel") {
-                resultadoFinal = "User Ganhou"
-            }
-            if (_escolhaUser.value == "tesoura") {
-                resultadoFinal = "App Ganhou"
-            }
-            if (_escolhaUser.value == "spock") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "lagarto") {
-                resultadoFinal = "APP Ganhou";
-            }
-        }
+        val escolhaApp = escolhaDoClickApp()
 
-        if (escolhaDoClickApp() == "papel") {
-            if (_escolhaUser.value == "pedra") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "papel") {
-                resultadoFinal = "Empate";
-            }
-            if (_escolhaUser.value == "tesoura") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "spock") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "lagarto") {
-                resultadoFinal = "User Ganhou";
-            }
-        }
+        val regras = mapOf(
+            "pedra" to mapOf("pedra" to "Empate", "papel" to "User Ganhou", "tesoura" to "App Ganhou", "spock" to "User Ganhou", "lagarto" to "App Ganhou"),
+            "papel" to mapOf("pedra" to "App Ganhou", "papel" to "Empate", "tesoura" to "User Ganhou", "spock" to "App Ganhou", "lagarto" to "User Ganhou"),
+            "tesoura" to mapOf("pedra" to "User Ganhou", "papel" to "App Ganhou", "tesoura" to "Empate", "spock" to "App Ganhou", "lagarto" to "User Ganhou"),
+            "spock" to mapOf("pedra" to "User Ganhou", "papel" to "App Ganhou", "tesoura" to "User Ganhou", "spock" to "Empate", "lagarto" to "App Ganhou"),
+            "lagarto" to mapOf("pedra" to "User Ganhou", "papel" to "App Ganhou", "tesoura" to "User Ganhou", "spock" to "App Ganhou", "lagarto" to "Empate"),
+        )
 
-        if (escolhaDoClickApp() == "tesoura") {
-            if (_escolhaUser.value == "pedra") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "papel") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "tesoura") {
-                resultadoFinal = "Empate";
-            }
-            if (_escolhaUser.value == "spock") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "lagarto") {
-                resultadoFinal = "User Ganhou";
-            }
-        }
-
-        if (escolhaDoClickApp() == "spock") {
-            if (_escolhaUser.value == "pedra") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "papel") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "tesoura") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "spock") {
-                resultadoFinal = "Empate";
-            }
-            if (_escolhaUser.value == "lagarto") {
-                resultadoFinal = "APP Ganhou";
-            }
-        }
-
-        if (escolhaDoClickApp() == "lagarto") {
-            if (_escolhaUser.value == "pedra") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "papel") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "tesoura") {
-                resultadoFinal = "User Ganhou";
-            }
-            if (_escolhaUser.value == "spock") {
-                resultadoFinal = "APP Ganhou";
-            }
-            if (_escolhaUser.value == "lagarto") {
-                resultadoFinal = "Empate";
-            }
-        }
-
-        Log.d("Entrei aqui", resultadoFinal)
+        _resultadoFinal.value = regras[escolhaApp]?.get(item) ?: ""
     }
-
-//    fun resultadoJogo() {
-//        val resultadoFinalDoJogo = when (escolhaDoUsuario("")) {
-//            "pedra" -> "re"
-//            else -> {}
-//        }
-//    }
 }
